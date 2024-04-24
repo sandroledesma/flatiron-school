@@ -9,3 +9,42 @@
   2. Write a <head> and <body>.
   3. Link this file to `index.js`, so that the browser loads that file **after** loading the <body>.
 -->
+
+<!DOCTYPE html> 
+
+<!-- This is a comment tag, also executable by shortcut "CMD + /" -->
+<!-- <head></head> are nonvisual elements: does not show up on the page-->
+<head>
+  <meta lang="en" />
+  <title>My Website!</title>
+  <!-- defer runs HTML before the javascript-->
+  <script defer src="./index.js"></script>
+</head>
+
+<body>
+  <!-- some tags are h1, h2, img, div, p, a, span,-->
+  <h1>An Introduction to HTML</h1>
+  <h2>by Sandro Ledesma</h2>
+  <!-- div creates separation/division to your webpage-->
+  <div>
+    <h3>Some less important heading...</h3>
+    <h4>Even less important down here...</h4>
+  </div>
+  <p>Some text as a paragraph... the content of the page</p>
+  <!-- img tag below, src with URL, alt means alternative text, if img doesnt show-->
+  <img src="https://developer.mozilla.org/assets/mdn_contributor.png" alt="HTML Logo">
+  <a href=""https://flatironschool.com>Flatiron School</a>
+  <article> <!-- self contained composition-->
+    <h4>The quick brown fox jumped over the lazy dog</h4>
+    <h5>The quick brown fox jumped over the lazy dog</h5>
+    <h6>The quick brown fox jumped over the lazy dog</h6>
+    <address>the fox was not brown and the dog was not lazy</address>
+  </article>
+
+  <div>
+  <h2>List of names</h2>
+    <ol>Sandro</ol>
+    <ol>Lucy</ol>
+  </div>
+
+</body>

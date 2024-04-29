@@ -18,12 +18,9 @@ POST basically means we are creating our own DATA SET.
 
 fetch("http://localhost:3000/dogs")
 .then((response) => response.json()) // if using curly braces, return must be added {return response.json()}
-.then(dogs => {    
-    for (let i = 0; i < dogs.length; i++) {  // i++ is basically "i = i + 1
-        console.log(dogs[i]);
-    }; // for loop code does not include any append function (FYI)
+.then((dogs) => {    
+    const ul = document.querySelector("#dogs");
     dogs.forEach(dog => { // this is the same than the for loop above
-        const ul = document.querySelector("#dogs");
         const li = document.createElement("li");
         li.textContent = (dog["name"] + " (" + dog["age"] + ")");
         ul.append(li);

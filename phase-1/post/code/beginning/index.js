@@ -18,12 +18,12 @@ POST basically means we are creating our own DATA SET.
 
 fetch("http://localhost:3000/dogs")
 .then((response) => response.json()) // if using curly braces, return must be added {return response.json()}
-.then(dogs => {
-    const ul = document.querySelector("#dogs");
+.then(dogs => {    
     for (let i = 0; i < dogs.length; i++) {  // i++ is basically "i = i + 1
         console.log(dogs[i]);
     }; // for loop code does not include any append function (FYI)
     dogs.forEach(dog => { // this is the same than the for loop above
+        const ul = document.querySelector("#dogs");
         const li = document.createElement("li");
         li.textContent = (dog["name"] + " (" + dog["age"] + ")");
         ul.append(li);
@@ -62,5 +62,6 @@ document.querySelector("form").addEventListener("submit", event => {
 // ~ Challenges
 // 1. There are a handful of awfully similar lines in our requests. Try abstracting them
 //    into a function!
-// 2. Try writing your own POST request.
+// 2. Try writing your own POST request (for Cats).
+// 2.5. Replace the forms with an Add a Pet form where you can add a dog or a cat
 // 3. Try writing PATCH and DELETE requests!

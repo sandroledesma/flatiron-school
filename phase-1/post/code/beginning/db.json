@@ -1,0 +1,62 @@
+{
+  "cats": [
+    {
+      "id": "1",
+      "name": "Octavia",
+      "age": 12,
+      "isACat": true,
+      "favoriteFoods": [
+        "Salmon",
+        "Pizza"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Ursula",
+      "age": 12,
+      "isACat": true,
+      "favoriteFoods": [
+        "Cod",
+        "Mice"
+      ]
+    }
+  ],
+  "dogs": [
+    {
+      "id": "1",
+      "name": "Lucy",
+      "age": 6,
+      "isGoodDog": true
+    },
+    {
+      "id": "2",
+      "name": "Max",
+      "age": 3,
+      "isGoodDog": false
+    },
+    {
+      "id": "3",
+      "name": "Benji",
+      "age": "unknown",
+      "isGoodDog": true
+    },
+    {
+      "id": "eaab",
+      "name": "james",
+      "age": "5",
+      "isGoodDog": true
+    },
+    {
+      "id": "5b24",
+      "name": "brandon",
+      "age": "10",
+      "isGoodDog": true
+    },
+    {
+      "id": "2163",
+      "name": "mildred",
+      "age": "12",
+      "isGoodDog": true
+    }
+  ]
+}

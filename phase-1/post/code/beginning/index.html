@@ -9,17 +9,10 @@
 
   <body>
     <h1>POST Requests</h1>
-    <h2>Dogs</h2>
-    <ul id="dogs"></ul>
-    <h3>Add a Dog!</h3>
-    <form>
-      <label>Name: <input name="name" /> </label>
-      <label>Age: <input type="number" name="age" /> </label>
-      <input type="submit" value="Add Dog!" />
-    </form>
+    
+    <!-- <form>
     <h3>Add a Pet!</h3>
-    <form>
-      <select name="pet">
+      <select id="petType" name="priority">
         <option value=""></option>
         <option id="newDog" value="Dog">Dog</option>
         <option id="newCat" value="Cat">Cat</option>
@@ -27,10 +20,22 @@
       <label>Name: <input name="name" /> </label>
       <label>Age: <input type="number" name="age" /> </label>
       <input type="submit" value="Add a Pet!" />
+    </form> -->
+    
+    <h2>Dogs</h2>
+    <ul id="dogs"></ul>
+    <form name="dogForm">
+      <label>Name: <input name="dogName" /> </label>
+      <label>Age: <input type="number" name="dogAge" /> </label>
+      <input type="submit" value="Add a Dog!" />
     </form>
-
     <h2>Cats</h2>
     <ul id="cats"></ul>
+    <form name="catForm">
+      <label>Name: <input name="catName" /> </label>
+      <label>Age: <input type="number" name="catAge" /> </label>
+      <input type="submit" value="Add a Cat!" />
+    </form>
   </body>
 
 </html>

@@ -19,6 +19,12 @@
         "Cod",
         "Mice"
       ]
+    },
+    {
+      "id": "8033",
+      "name": "Margaret",
+      "age": "5",
+      "isACat": true
     }
   ],
   "dogs": [
@@ -41,22 +47,10 @@
       "isGoodDog": true
     },
     {
-      "id": "eaab",
-      "name": "james",
-      "age": "5",
-      "isGoodDog": true
-    },
-    {
-      "id": "5b24",
-      "name": "brandon",
-      "age": "10",
-      "isGoodDog": true
-    },
-    {
-      "id": "2163",
-      "name": "mildred",
-      "age": "12",
-      "isGoodDog": true
+      "id": "dd09",
+      "name": "Fido",
+      "age": "8",
+      "isAGoodDog": true
     }
   ]
 }

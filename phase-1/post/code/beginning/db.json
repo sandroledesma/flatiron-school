@@ -45,12 +45,6 @@
       "name": "Benji",
       "age": "unknown",
       "isGoodDog": true
-    },
-    {
-      "id": "dd09",
-      "name": "Fido",
-      "age": "8",
-      "isAGoodDog": true
     }
   ]
 }

@@ -144,4 +144,4 @@ document.querySelector("form[name='catForm']").addEventListener("submit", event 
 //    into a function! DONE
 // 2. Try writing your own POST request (for Cats). DONE
 // 2.5. Replace the forms with an Add a Pet form where you can add a dog or a cat
-//  3. Try writing PATCH and DELETE requests
+// 3. Try writing PATCH and DELETE requests

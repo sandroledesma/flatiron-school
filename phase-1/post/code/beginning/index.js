@@ -46,7 +46,7 @@ fetch("http://localhost:3000/cats") // repeated fetch code for the cats db
 // Now, let's trigger a POST request when the user submits the form, so that they can add data to the database! 
 // Remember to think about the event, the target, and the handler when planning a listener.
 
-/* CODE FOR DROP DOWN "ADD A PET" feature (getting .value issues)
+// CODE FOR DROP DOWN "ADD A PET" feature (getting .value issues)
 
 document.addEventListener("DOMContentLoaded", (event) => {
     const form = document.querySelector("form"); // create a const for the typical 'document.QuerySelector("form") part of the event listener
@@ -56,17 +56,23 @@ document.addEventListener("DOMContentLoaded", (event) => {
     
     const petName = event.target["petName"].value;
     const petAge = event.target["petAge"].value;
-    const petType = event.target.priority.value; 
+    const petType = event.target["priority"].value;
+    
+    console.log("Pet Name:", petName);
+    console.log("Pet Age:", petAge);
+    console.log("Pet Type:", petType);
 
     // create if...else statement for the hosts 
     let endpoint;
     if (petType === "newDog") {
-        endpoint = "http://localhost:3000/dogs/";
+        endpoint = "http://localhost:3000/dogs";
     } else if (petType === "newCat") {
-        endpoint = "http://localhost:3000/cats/";
+        endpoint = "http://localhost:3000/cats";
     }
 
-    fetch(endpoint, { // instead of fetch("http://localhost:3000/dogs/", since we have created an endpoint if...else statement
+    console.log("Endpoint:", endpoint);
+
+    fetch(endpoint, { 
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -75,7 +81,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
         body: JSON.stringify({
             name: petName,
             age: petAge 
-            // isGoodDog: true // is it possible to add other parameters that are not shared between dogs and cats db? 
         })
     })
     .then(response => response.json())
@@ -84,9 +89,26 @@ document.addEventListener("DOMContentLoaded", (event) => {
                                        // if petType is equal to newDog, return #dogs. else, return #cats 
         createAndAppendListItem(ul, `${newPet.name} (${newPet.age})`);                    
     })
+    // CREATE A PATCH REQUEST 
+    fetch(endpoint, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+        },
+        body: JSON.stringify({
+            name: newPetName,
+            age: newPetAge 
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Resource updated successfully!', data);
+    })
 });
-}); */
+}); 
 
+/* CODE FOR SEPARATE DOG AND CAT FORMS
 document.addEventListener("DOMContentLoaded", (event) => {
 
 document.querySelector("form[name='dogForm']").addEventListener("submit", event => {
@@ -135,13 +157,15 @@ document.querySelector("form[name='catForm']").addEventListener("submit", event 
         const ul = document.querySelector("#cats");
         createAndAppendListItem(ul, `${newCat.name} (${newCat.age})`);
         console.log(newCat);})
-});
+}); 
 
-});
+}); */
+
+
 
 // ~ Challenges
 // 1. There are a handful of awfully similar lines in our requests. Try abstracting them
 //    into a function! DONE
 // 2. Try writing your own POST request (for Cats). DONE
-// 2.5. Replace the forms with an Add a Pet form where you can add a dog or a cat
+// 2.5. Replace the forms with an Add a Pet form where you can add a dog or a cat. DONE
 // 3. Try writing PATCH and DELETE requests

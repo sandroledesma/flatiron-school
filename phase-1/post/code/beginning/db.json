@@ -25,6 +25,11 @@
       "name": "Margaret",
       "age": "5",
       "isACat": true
+    },
+    {
+      "id": "bf97",
+      "name": "Nancy",
+      "age": "15"
     }
   ],
   "dogs": [
@@ -45,6 +50,11 @@
       "name": "Benji",
       "age": "unknown",
       "isGoodDog": true
+    },
+    {
+      "id": "f0b5",
+      "name": "Theodore",
+      "age": "4"
     }
   ]
 }

@@ -35,26 +35,26 @@
   "dogs": [
     {
       "id": "1",
-      "name": "Lucy",
-      "age": 6,
-      "isGoodDog": true
-    },
-    {
-      "id": "2",
       "name": "Max",
       "age": 3,
       "isGoodDog": false
     },
     {
-      "id": "3",
+      "id": "2",
       "name": "Benji",
       "age": "unknown",
       "isGoodDog": true
     },
     {
-      "id": "f0b5",
+      "id": "3",
       "name": "Theodore",
-      "age": "4"
+      "age": "4",
+      "isGoodDog": true
+    },
+    {
+      "id": "2330",
+      "name": "Lucy",
+      "age": "6"
     }
   ]
 }

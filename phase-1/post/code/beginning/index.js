@@ -10,19 +10,78 @@ Objectives
 1. Make a GET request to display a dataset.
 2. Make a POST request to add to that dataset.
 
-POST basically means we are creating our own DATA SET. 
-
-*/
-
-function createAndAppendListItem(parentElement, text) { 
-    // this function creates and appends a new list item (li) via a parent element (ul) and the corresponding text output (li.textContent = "")
-    // const ul = document.querySelector("dogs"); is not in this consolidated function because it needs to select the right query (dogs or cats)
-    const li = document.createElement("li"); // originally in forEach statement
-    li.textContent = text; // originally in forEach statement as li.textContent = (dog["name"] + " (" + dog["age"] + ")");
-    parentElement.append(li); // originally in forEach statement as ul.append(li) -> which is why the function includes parentElement
-}
+POST basically means we are creating our own DATA SET. */
 
 // Let's try making a GET request to display existing data on the page.
+
+document.addEventListener("DOMContentLoaded", (event) => {
+    function createAndAppendListItem(parentElement, text) { 
+        // this function creates and appends a new list item (li) via a parent element (ul) and the corresponding text output (li.textContent = "")
+        // const ul = document.querySelector("dogs"); is not in this consolidated function because it needs to select the right query (dogs or cats)
+        const li = document.createElement("li"); // originally in forEach statement
+        li.textContent = text; // originally in forEach statement as li.textContent = (dog["name"] + " (" + dog["age"] + ")");
+        parentElement.append(li); // originally in forEach statement as ul.append(li) -> which is why the function includes parentElement
+    }
+
+    function populateDropdown(pets, selectId) {
+        const select = document.getElementById(selectId);
+        select.innerHTML = ""; // Clear existing options
+        pets.forEach(pet => { // Iterate through each pet and create an option element
+            const option = document.createElement("option");
+            option.value = pet.id; 
+            option.textContent = `${pet.name} (${pet.age})`;
+            select.appendChild(option); 
+        });
+    }
+
+    fetch("db.json")
+    .then(response => response.json())
+    .then(data => {
+        const dogs = data.dogs;
+        const cats = data.cats;
+        populateDropdown(dogs, "update");
+        populateDropdown(cats, "update");
+    })
+    .catch(error => {
+        console.error("Error fetching data:", error);
+    });
+
+    const form = document.getElementById("update-pet");
+
+    form.addEventListener("submit", event => {
+        event.preventDefault();
+        
+        const petId = event.target.updatePet.value;
+        const updatePetType = event.target.updatePetType.value;
+        const updatePetName = event.target.updatePetName.value;
+        const updatePetAge = event.target.updatePetAge.value;
+    
+        let endpoint;
+        if (updatePetType === "updateDog") {
+            endpoint = `http://localhost:3000/dogs/${petId}`;
+        } else if (updatePetType === "updateCat") {
+            endpoint = `http://localhost:3000/cats/${petId}`;
+        }
+    
+        fetch(endpoint, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            },
+            body: JSON.stringify({
+    //          type: updatePetType,
+                name: updatePetName,
+                age: updatePetAge 
+            }),
+        })
+        .then((response) => response.json())
+        .then((updatePetType) => {
+            console.log('Resource updated successfully!', updatePetType);
+        });
+        console.log("Update Pet Type:", updatePetType);
+    });
+
 
 fetch("http://localhost:3000/dogs")
 .then((response) => response.json()) // if using curly braces, return must be added {return response.json()}
@@ -43,12 +102,21 @@ fetch("http://localhost:3000/cats") // repeated fetch code for the cats db
     }); 
 });
 
+
 // Now, let's trigger a POST request when the user submits the form, so that they can add data to the database! 
 // Remember to think about the event, the target, and the handler when planning a listener.
 
-// CODE FOR DROP DOWN "ADD A PET" feature (getting .value issues)
+    fetch("http://localhost:3000/dogs")
+        .then(response => response.json())
+        .then(dogs => { console.log("Dogs:", dogs); })
+        .catch(error => { console.error("Error fetching dogs:", error); });
 
-document.addEventListener("DOMContentLoaded", (event) => {
+    fetch("http://localhost:3000/cats")
+        .then(response => response.json())
+        .then(cats => { console.log("Cats:", cats); })
+        .catch(error => { console.error("Error fetching cats:", error); });
+    });
+    
     const form = document.querySelector("form"); // create a const for the typical 'document.QuerySelector("form") part of the event listener
 
     form.addEventListener("submit", event => {
@@ -85,28 +153,46 @@ document.addEventListener("DOMContentLoaded", (event) => {
     })
     .then(response => response.json())
     .then(newPet => {
+        console.log("New Pet:", newPet)
         const ul = document.querySelector(petType === "newDog" ? "#dogs" : "#cats") //instead of ("#dogs"), enter a ternary statement 
                                        // if petType is equal to newDog, return #dogs. else, return #cats 
-        createAndAppendListItem(ul, `${newPet.name} (${newPet.age})`);                    
-    })
-    // CREATE A PATCH REQUEST 
-    fetch(endpoint, {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-        },
-        body: JSON.stringify({
-            name: newPetName,
-            age: newPetAge 
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Resource updated successfully!', data);
-    })
+        createAndAppendListItem(ul, `${newPet.name} (${newPet.age})`);   
+        fetch(petType === "newDog" ? "http://localhost:3000/dogs" : "http://localhost:3000/cats") //another ternary statement
+            .then(response => response.json())
+            .then(pets => {     
+            console.log("Updated Pets:", pets);   
+            populateDropdown(newPet, "update"); 
+        });                
+    });
 });
-}); 
+
+    // CREATE A PATCH REQUEST
+// function addNewPet(randomObj, petType) {
+//         const ul = document.querySelector(`#${petType}`);
+//         const li = document.createElement("li");
+//         li.textContent = `${randomObj.name} (${randomObj.age})`;
+//         ul.append(li);
+//         const select = document.querySelector("#remove");
+//         const option = document.createElement("option");
+//         option.value = `${randomObj.id}`;
+//         option.className = `${petType}`;
+//         option.textContent = `${randomObj.name} (${randomObj.age})`;
+//         select.append(option);
+//       }
+
+// function updateSelection(randomObj, animalType) {
+//     const select = document.querySelector("#update");
+//     const option = document.createElement("option");
+//     option.value = `${randomObj.id}`;
+//     option.id = `${petType}`;
+//     option.textContent = `${randomObj.name} (${randomObj.age})`;
+//     select.append(option);
+// //     console.log(option);
+//     select.append(option);
+// }
+
+
+ 
 
 /* CODE FOR SEPARATE DOG AND CAT FORMS
 document.addEventListener("DOMContentLoaded", (event) => {

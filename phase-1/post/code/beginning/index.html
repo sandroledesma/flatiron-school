@@ -10,17 +10,17 @@
   <body>
     <h1>POST Requests</h1>
     
- <form>
-    <h3>Add a Pet!</h3>
-      <label id="priority" name="priority">
+    <form id="add-pet">
+      <h3>Add a Pet!</h3>
+      <label id="priority" name="priority" placeholder="Dog/Cat"/>
         <select name="priority">
          <option value=""></option>
          <option value="newDog">Dog</option>
-          <option value="newCat">Cat</option>
-       </select>
+         <option value="newCat">Cat</option>
+        </select>
       </label>
-      <label>Name: <input name="petName" /> </label>
-      <label>Age: <input type="number" name="petAge" /> </label>
+      <label>Name: <input name="petName" placeholder="Pet's Name"/> </label>
+      <label>Age: <input type="number" name="petAge" placeholder="Pet's Age"/> </label>
       <input type="submit" value="Add a Pet!" />
     </form> 
     
@@ -38,6 +38,22 @@
       <label>Age: <input type="number" name="catAge" /> </label>
       <input type="submit" value="Add a Cat!" />
     </form> -->
+    
+    <form id="update-pet">    
+      <h4>Update A Pet!</h4> 
+      <label>
+        <select name="updatePet" id="update"></select><br />
+        <select name="updatePetType" id="updatePetType">
+         <option value=""></option>
+         <option value="updateDog">Dog</option>
+         <option value="updateCat">Cat</option>
+       </select>
+      </label>
+      <label>Name: <input name="updatePetName" placeholder="Updated Pet's Name"/> </label>
+      <label>Age: <input type="number" name="updatePetAge" placeholder="Updated Pet's Age" /> </label>
+      <input type="submit" value="Update Pet!" />
+
+    </form>
   </body>
 
 </html>

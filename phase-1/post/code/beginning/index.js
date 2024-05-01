@@ -37,49 +37,63 @@ document.addEventListener("DOMContentLoaded", (event) => {
     fetch("db.json")
     .then(response => response.json())
     .then(data => {
-        const dogs = data.dogs;
         const cats = data.cats;
-        populateDropdown(dogs, "update");
-        populateDropdown(cats, "update");
+        const dogs = data.dogs;
+        populateDropdown(cats, "selectId");
+        populateDropdown(dogs, "selectId");
+
     })
     .catch(error => {
         console.error("Error fetching data:", error);
     });
 
-    const form = document.getElementById("update-pet");
+    const formUpdate = document.getElementById("update-pet");
 
-    form.addEventListener("submit", event => {
+    formUpdate.addEventListener("submit", event => {
         event.preventDefault();
         
         const petId = event.target.updatePet.value;
-        const updatePetType = event.target.updatePetType.value;
+        const updatePet = event.target.updatePet.id;
         const updatePetName = event.target.updatePetName.value;
         const updatePetAge = event.target.updatePetAge.value;
     
-        let endpoint;
-        if (updatePetType === "updateDog") {
-            endpoint = `http://localhost:3000/dogs/${petId}`;
-        } else if (updatePetType === "updateCat") {
-            endpoint = `http://localhost:3000/cats/${petId}`;
+
+        if (updatePet === "dogs") {
+            fetch(`http://localhost:3000/dogs/${petId}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                },
+                body: JSON.stringify({
+        //          type: updatePetType,
+                    name: updatePetName,
+                    age: updatePetAge 
+                }),
+            })
+            .then((response) => response.json())
+            .then((updatePet) => {
+                console.log('Resource updated successfully!', updatePet);
+            });
+        } else if (updatePet === "cats") {
+            fetch(`http://localhost:3000/cats/${petId}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                },
+                body: JSON.stringify({
+        //          type: updatePetType,
+                    name: updatePetName,
+                    age: updatePetAge 
+                }),
+            })
+            .then((response) => response.json())
+            .then((updatePet) => {
+                console.log('Resource updated successfully!', updatePet);
+                populateDropdown(updatePet, `${updatePetType}`);
+            });        
         }
-    
-        fetch(endpoint, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-            },
-            body: JSON.stringify({
-    //          type: updatePetType,
-                name: updatePetName,
-                age: updatePetAge 
-            }),
-        })
-        .then((response) => response.json())
-        .then((updatePetType) => {
-            console.log('Resource updated successfully!', updatePetType);
-        });
-        console.log("Update Pet Type:", updatePetType);
     });
 
 
@@ -115,7 +129,6 @@ fetch("http://localhost:3000/cats") // repeated fetch code for the cats db
         .then(response => response.json())
         .then(cats => { console.log("Cats:", cats); })
         .catch(error => { console.error("Error fetching cats:", error); });
-    });
     
     const form = document.querySelector("form"); // create a const for the typical 'document.QuerySelector("form") part of the event listener
 
@@ -138,8 +151,6 @@ fetch("http://localhost:3000/cats") // repeated fetch code for the cats db
         endpoint = "http://localhost:3000/cats";
     }
 
-    console.log("Endpoint:", endpoint);
-
     fetch(endpoint, { 
         method: "POST",
         headers: {
@@ -160,10 +171,9 @@ fetch("http://localhost:3000/cats") // repeated fetch code for the cats db
         fetch(petType === "newDog" ? "http://localhost:3000/dogs" : "http://localhost:3000/cats") //another ternary statement
             .then(response => response.json())
             .then(pets => {     
-            console.log("Updated Pets:", pets);   
-            populateDropdown(newPet, "update"); 
         });                
     });
+});
 });
 
     // CREATE A PATCH REQUEST

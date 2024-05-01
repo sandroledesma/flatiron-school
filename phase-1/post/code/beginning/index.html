@@ -42,18 +42,19 @@
     <form id="update-pet">    
       <h4>Update A Pet!</h4> 
       <label>
-        <select name="updatePet" id="update"></select><br />
-        <select name="updatePetType" id="updatePetType">
-         <option value=""></option>
-         <option value="updateDog">Dog</option>
-         <option value="updateCat">Cat</option>
-       </select>
+        <select name="updatePet" id="update">
+       </select> <br />
+        <select name="petId" id="selectId">
+          <option value="updateDog"></option>
+          <option value="updateCat"></option>
+        </select><br />
       </label>
       <label>Name: <input name="updatePetName" placeholder="Updated Pet's Name"/> </label>
       <label>Age: <input type="number" name="updatePetAge" placeholder="Updated Pet's Age" /> </label>
       <input type="submit" value="Update Pet!" />
 
     </form>
+
   </body>
 
 </html>

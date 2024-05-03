@@ -42,7 +42,6 @@ document.addEventListener('keyDown', function() {
     // FUNCTION: nextCocktail = keyDown event listener to next cocktail with the same liquor type/flavor profile
     // image src = ./images/keydown-image.png
     const nextCocktail =  "";
-
 }),
 
 function cocktailServingSize() {

@@ -58,3 +58,14 @@ body {
     padding-left: 3px;
 }
 
+.glass-image {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    width: 150px;
+}
+
+.cocktail-container:hover .glass-image {
+    display: block;
+}

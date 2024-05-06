@@ -65,11 +65,12 @@ document.getElementById('cocktail-finder').addEventListener('submit', function(e
 function displayCocktail(cocktail) {
     const cocktailList = document.getElementById('cocktail-container');
     const liquorType = Array.isArray(cocktail['liquor-type']) ? cocktail['liquor-type'].join(', ') : cocktail['liquor-type'];
+    const servingSize = 1;
     // Below Code is building HTML within JavaScript - hence the back tick usage and no color differentiation. String interpolation is being used for pulling info from db.json
     const cocktailHTML = `
         <h2>${cocktail.name}</h2>
         <label for="serving-size">Serving Size:</label>
-        <input type="number" id="serving-size" value="1" style="width: 30px; text-align: center">
+        <input type="number" id="serving-size" value="${servingSize}" style="width: 30px; text-align: center">
         <button id="update-serving-size">Update</button>
         <p><strong>Ingredients:</strong></p>
         <ul>
@@ -84,23 +85,51 @@ function displayCocktail(cocktail) {
     `;
     cocktailList.innerHTML = cocktailHTML;
     cocktailList.style.display = 'block';
+    
+    // FUNCTION: servingSize = cocktails.ingredients.amount.value * servingSize
+    const updateButton = document.getElementById('update-serving-size');
+    updateButton.addEventListener('click', function() {
+      const servingSize = document.getElementById('serving-size');
+      const newServingSize = parseInt(servingSize.value);
+
+      const ingredientList = document.querySelector('#cocktail-container ul');
+      cocktail.ingredients.forEach((ingredient, index) => {
+          const ingredientItem = ingredientList.children[index];
+          const amountElement = ingredientItem.firstChild;
+          amountElement.textContent = `${ingredient.amount.value * newServingSize} ${ingredient.amount.unit} ${ingredient.name}`
+      });
+    });
 }
 
+function displayGlassImage(glassType) {
+  const glassImage = document.createElement('img');
+  glassImage.src = `./images/glass/${glassType.toLowerCase().replace(/\s+/g, '-')}.png`;;
+  glassImage.alt = '${glassType} Glass';
+  glassImage.classList.add('glass-image');
+  document.getElementById('cocktail-container').appendChild(glassImage);
+}
+
+document.getElementById('cocktail-container').addEventListener('mouseover', function(event) {
+  // FUNCTION: glassCocktail = mouseover event listener to show image of glass when mouse is over the cocktails.glass 
+  // images are contained in img src = ./images/glass/...
+  const target = event.target;
+  if (target.tagName === 'P' && target.innerText.startsWith('Glass:')) {
+    const glassType = target.innerText.split(':')[1].trim();
+    displayGlassImage(glassType);
+  }
+});
+
+document.getElementById('cocktail-container').addEventListener('mouseout', function(event) {
+  const glassImage = document.querySelector('.glass-image');
+  if (glassImage) {
+      glassImage.remove();
+  }
+});
+
 document.addEventListener('keyDown', function() {
-    // FUNCTION: nextCocktail = keyDown event listener to next cocktail with the same liquor type/flavor profile
-    // image src = ./images/keydown-image.png
-    const nextCocktail =  "";
-}),
-
-function cocktailServingSize() {
-    // FUNCTION: cocktailServingSize = cocktails.ingredients.amount.value * servingSize
-},
-
-document.addEventListener('mouseover', function() {
-    // FUNCTION: glassCocktail = mouseover event listener to show image of glass when mouse is over the cocktails.glass 
-    // images are contained in img src = ./images/glass/...
-    const glassCocktail = "";
-
+  // FUNCTION: nextCocktail = keyDown event listener to next cocktail with the same liquor type/flavor profile
+  // image src = ./images/keydown-image.png
+  const nextCocktail =  "";
 })
 
 });

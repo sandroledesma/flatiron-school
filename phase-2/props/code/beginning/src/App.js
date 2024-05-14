@@ -13,10 +13,27 @@ Core Deliverables
 
 */
 
+import Item from './Item';
+
 function App() {
+  const items = [
+    { // create an id for a list in React
+      id: 0,
+      name: "Dragon Bubble Tea",
+      price: 5
+    }, 
+    {
+      id: 1,
+      name: "Cookies",
+      price: 3
+    }
+  ];
   return (
     <div>
       <h1>Sakib's Boba Shop</h1>
+      <ul>
+        {items.map(item => <Item key={item.id} itemProp={item} />)}
+      </ul>
     </div>
   )
 }

@@ -42,5 +42,12 @@ function App() {
     </div>
   );
 }
+const setclick;
+function click() {
+  setClick(click + 1)
+  setClick(click + 1)
+  setClick(click + 1)
+}
+console.log(setClick);
 
 export default App;

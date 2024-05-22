@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 import Form from "../form";
+import { useLoaderData } from "react-router-dom";
 
 // This component will render in the root's outlet at `/teas`.
 export default function Teas() {
     // Access this route's loader data and store it in state.
-    const [ teas, setTeas ] = useState([]);
+    const [ teas, setTeas ] = useState(useLoaderData());
 
-    useEffect(() => {
-        fetch("http://localhost:3000/teas")
-        .then(response => response.json())
-        .then(teasInDatabase => setTeas(teasInDatabase));
-    }, []);
+    // useEffect(() => {
+    //     fetch("http://localhost:3000/teas")
+    //     .then(response => response.json())
+    //     .then(teasInDatabase => setTeas(teasInDatabase));
+    // }, []);
 
     // We'll pass this function to <Form> to handle its `submit` event.
     function handleSubmit(event) {

@@ -16,15 +16,47 @@ Core Deliverables
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
+
 // Tailwind CSS (along with ../tailwind.config.js)
 import "./index.css";
+
+// React Router 
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+
+//Components
+import Welcome from "./welcome";
+import Teas from "./routes/teas";
+import About from "./routes/about";
+import Root from "./routes/root";
+import Error from "./error";
+
+const router = createBrowserRouter([
+   {
+      path: "/",
+      element: <Root />, 
+      errorElement: <Error />,
+      children: [
+        {
+          path: "/",
+          element: <Welcome />
+        },
+        {
+          path: "teas",
+          element: <Teas />,
+          loader: async () => {return fetch("http://localhost:3000/teas").then(response => response.json())}
+        }, 
+        {
+          path: "about",
+          element: <About />
+        }
+      ]
+   }
+  ]); 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <h1 className='text-2xl hover:italic font-semibold'>
-      Sakib's Tea House
-    </h1>
+    <RouterProvider router={router}/>
   </React.StrictMode>
 );
 

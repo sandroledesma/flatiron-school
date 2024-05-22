@@ -11,7 +11,6 @@ Core Deliverables
 5. (Bonus!) Render the list of members in `App` instead of `Form`.
 
 */
-
 import Form from './Form';
 
 function App() {
